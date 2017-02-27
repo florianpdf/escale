@@ -1,0 +1,205 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <div class="row barre_de_recherche">
+        <div class="col m6 s12 offset-m3 input_search">
+            <input id="pac-input" class="controls" type="text" value="{% if location is not null %}{{ location }}{% endif %}" placeholder="Où ?">
+            <a href="{{ path('map') }}" id="geolocalisation_button" class="geolocalisation_button"><img src="{{ asset('bundles/escale/images/GeoLoc.jpg') }}"></a>
+            <a class="waves-effect waves-light btn get_map" id="googlemap">Rechercher</a>
+        </div>
+    </div>
+
+    <div id="map"></div>
+
+{% endblock %}
+
+{% block javascripts %}
+
+    {{ parent() }}
+    <script>
+        function get_address(address){
+            if (address != ''){
+                var latitude = 0;
+                var longitude = 0;
+                var geocoder = new google.maps.Geocoder();
+
+                geocoder.geocode( { 'address': address}, function(results, status) {
+
+                    if (status == google.maps.GeocoderStatus.OK) {
+                        latitude = results[0].geometry.location.lat();
+                        longitude = results[0].geometry.location.lng();
+                    }
+                });
+
+                var initialPositionMap= {
+                    lat: latitude, lng: longitude
+                };
+                map = new google.maps.Map(document.getElementById('map'), {
+                    center: initialPositionMap,
+                    zoom: 6
+                });
+            }
+        }
+        $(document).ready(function(){
+            var address = '{% if location is not null %}{{ location }}{% endif %}';
+            get_address(address);
+        });
+
+        $('#googlemap').on('click', function () {
+            var address = $('#pac-input').value;
+            get_address(address);
+        });
+    </script>
+    <script>
+        //Initialisation de la map
+        var map;
+
+        function attachDescription(marker, description) {
+
+            var infowindow = new google.maps.InfoWindow({
+                content: description
+            });
+
+            marker.addListener('click', function() {
+                infowindow.open(marker.get('map'), marker);
+            });
+        }
+
+        function initAutocomplete() {
+
+            var initialPositionMap= {
+                lat: 47.081012, lng: 2.398782
+            };
+            map = new google.maps.Map(document.getElementById('map'), {
+                center: initialPositionMap,
+                zoom: 6
+            });
+
+            {% for spot in spots %}
+
+                var myLatLng = {
+                    lat: {{ spot.spotGpsLat }},
+                    lng: {{ spot.spotGpsLng }}
+                };
+
+                var marker = new google.maps.Marker({
+                    position: myLatLng,
+                    map: map,
+                    title: '{{ spot.spotNom }}'
+                });
+
+                var contentString =
+                        '<div class="row"><h2>{{ spot.spotNom }}</h2></div>' +
+                        '<div class="row">'+
+                            '<div class="col md6">'+
+
+                            '</div>'+
+                            '<div class="col md6">'+
+                                '<p><h4>A 48 km au nord des Sables d\'Olonne et à 46 km au sud de Pornic.</h4></p>'+
+                            '</div>'+
+                        '</div>'+
+                        '<div class="row">'+
+                                '<a href="{{ path('map_show') }}" class="waves-effect waves-light btn btn_jyvais">J\'y vais...</a>'+
+                         '</div>'+
+                         '<div class="row">'+
+//                                '<h2>Météo sur 3 jours:</h2>'+
+                                '<img class="meteo" src="{{ asset('bundles/escale/images/meteo.jpg') }}"/>'+
+                         '</div>';
+
+                attachDescription(marker, contentString);
+
+            {% endfor %}
+
+            // Try HTML5 Geolocation.
+            var centerControlDiv = document.getElementById('geolocalisation_button');
+
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function(position) {
+                    var pos = {
+                        lat: position.coords.latitude,
+                        lng: position.coords.longitude
+                    };
+                    centerControlDiv.addEventListener('click', function() {
+                        map.setCenter(pos);
+                    });
+
+                }, function() {
+                    var infoWindow = new google.maps.InfoWindow({map: map});
+                    handleLocationError(true, infoWindow, map.getCenter());
+                });
+            } else {
+                // Browser doesn't support Geolocation
+                var infoWindow = new google.maps.InfoWindow({map: map});
+                handleLocationError(false, infoWindow, map.getCenter());
+            }
+
+            function handleLocationError(browserHasGeolocation, pos) {
+                var infoWindow = new google.maps.InfoWindow({map: map});
+                infoWindow.setPosition(pos);
+                infoWindow.setContent(browserHasGeolocation ?
+                        'Error: Le service de géolocalisation rencontre une erreur.' :
+                        'Error: Votre navigateur ne supporte pas la géolocalisation');
+            }
+
+            // Create the search box and link it to the UI element.
+            var input = document.getElementById('pac-input');
+
+            var searchBox = new google.maps.places.SearchBox(input);
+
+            // Bias the SearchBox results towards current map's viewport.
+            map.addListener('bounds_changed', function() {
+                searchBox.setBounds(map.getBounds());
+            });
+
+            var markers = [];
+            // [START region_getplaces]
+            // Listen for the event fired when the user selects a prediction and retrieve
+            // more details for that place.
+            searchBox.addListener('places_changed', function() {
+                var places = searchBox.getPlaces();
+
+                if (places.length == 0) {
+                    return;
+                }
+
+                // Clear out the old markers.
+                markers.forEach(function(marker) {
+                    marker.setMap(null);
+                });
+                markers = [];
+
+                // For each place, get the icon, name and location.
+                var bounds = new google.maps.LatLngBounds();
+                places.forEach(function(place) {
+                    var icon = {
+                        url: place.icon,
+                        size: new google.maps.Size(71, 71),
+                        origin: new google.maps.Point(0, 0),
+                        anchor: new google.maps.Point(17, 34),
+                        scaledSize: new google.maps.Size(25, 25)
+                    };
+
+                    // Create a marker for each place.
+                    markers.push(new google.maps.Marker({
+                        map: map,
+                        icon: icon,
+                        title: place.name,
+                        position: place.geometry.location
+                    }));
+
+                    if (place.geometry.viewport) {
+                        // Only geocodes have viewport.
+                        bounds.union(place.geometry.viewport);
+                    } else {
+                        bounds.extend(place.geometry.location);
+                    }
+                });
+                map.fitBounds(bounds);
+            });
+            // [END region_getplaces]
+        }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDn52jFrq8R0F1RoukKhtsjINbPDa1v984&libraries=places&callback=initAutocomplete" async defer></script>
+
+{% endblock %}

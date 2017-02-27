@@ -1,0 +1,35 @@
+Process d'installation du projet hackathon "Escale"
+
+Si vous souhaitez consulter le site:
+
+1. Installer un serveur virtuel type apache sur sa machine
+	1. Linux: https://doc.ubuntu-fr.org/lamp
+	2. Windows: https://openclassrooms.com/courses/concevez-votre-site-web-avec-php-et-mysql/preparer-son-ordinateur-2
+		Section: "Sous Windows : WAMP"
+	3. Mac: https://openclassrooms.com/courses/concevez-votre-site-web-avec-php-et-mysql/preparer-son-ordinateur-2
+		Section: "Sous Mac OS X : MAMP"
+2. Une fois le serveur virtuel initialisé, déplacer le dossier "Escale" dans le dossier lu par votre serveur
+	ex: Par default, sous linux, ce dossier se trouve dans "/var/www/html"
+3. Ouvrir le navigateur, url: http://localhost/Escale
+
+Si vous souhaitez participer au developpement:
+
+1. Url du depot GitHub: https://github.com/YvesLP/Escale
+2. Pré-requis: 
+	1. composer ==> Install Composer: https://getcomposer.org/doc/00-intro.md
+	2. Symfony ==> Install Synfony 2: http://symfony.com/doc/current/setup.html
+
+3.1 Initialisation du projet via GitHub:
+	1. **Avec ssh**: git clone git@github.com:YvesLP/Escale.git 
+	2. **Sans ssh**: git clone git@github.com:YvesLP/Escale.git
+	3. cd Escale
+	4. composer install
+	5. php app/console doctrine:database:create
+	6. php app/console asset:install
+
+3.2 Initialisation du projet via DropBox
+	1. Deplacer les fichiers dans votre dossier intépréter par votre serveur virtuel
+	2. cd Escale
+	3. composer install
+	4. php app/console doctrine:database:create
+	5. php app/console asset:install

@@ -1,0 +1,98 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Service</h1>
+
+    <table>
+        <tbody>
+{#
+            <tr>
+                <th>Id</th>
+                <td>{{ service.id }}</td>
+            </tr>
+#}
+            <tr>
+                <th>Etat (Actif/Inactif)</th>
+                <td>{% if service.servEtat %}Actif{% else %}Inactif{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ service.servNom }}</td>
+            </tr>
+            <tr>
+                <th>Latitude</th>
+                <td>{{ service.servGpsLat }}</td>
+            </tr>
+            <tr>
+                <th>Longitude</th>
+                <td>{{ service.servGpsLng }}</td>
+            </tr>
+            <tr>
+                <th>Informations générales</th>
+                <td>{{ service.servInfos }}</td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>{{ service.servEmail }}</td>
+            </tr>
+            <tr>
+                <th>Téléphone</th>
+                <td>{{ service.servTel }}</td>
+            </tr>
+            <tr>
+                <th>Adresse</th>
+                <td>{{ service.servAdr }}</td>
+            </tr>
+{#
+            <tr>
+                <th>Servadr2</th>
+                <td>{{ service.servAdr2 }}</td>
+            </tr>
+#}
+            <tr>
+                <th>Code postal</th>
+                <td>{{ service.servCp }}</td>
+            </tr>
+            <tr>
+                <th>Ville</th>
+                <td>{{ service.servVille }}</td>
+            </tr>
+            <tr>
+                <th>Pays</th>
+                <td>{{ service.servPays }}</td>
+            </tr>
+            <tr>
+                <th>Photo</th>
+                <td>{{ service.servPhoto }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ service.servDesc }}</td>
+            </tr>
+{#
+            <tr>
+                <th>Site communautaire</th>
+                <td>{{ service.servSite }}</td>
+            </tr>
+#}
+            <tr>
+                <th>Likes</th>
+                <td>{{ service.servLikes }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('admin_service_index') }}">Retour à la liste</a>
+        </li>
+        <li>
+            <a href="{{ path('admin_service_edit', { 'id': service.id }) }}">Modifier</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

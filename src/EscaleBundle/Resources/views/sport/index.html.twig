@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Sports</h1>
+
+    <table>
+        <thead>
+            <tr>
+                {#<th>Id</th>#}
+                <th>Etat (Actif/Inactif)</th>
+                <th>Libellé</th>
+                <th>Pictogramme</th>
+                <th>Photo</th>
+                <th>Site</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for sport in sports %}
+            <tr>
+                {#<td><a href="{{ path('admin_sport_show', { 'id': sport.id }) }}">{{ sport.id }}</a></td>#}
+                <td>{% if sport.sportEtat %}Actif{% else %}Inactif{% endif %}</td>
+                <td>{{ sport.sportLib }}</td>
+                {#<td>{{ sport.sportPicto }}</td>#}
+                <td><img class="image_picto_sport" src="{{ asset('uploads/picto_sport/')}}{{ sport.sportPicto }}"></td>
+                {#<td>{{ sport.sportPhoto }}</td>#}
+                <td><img class="image_sport" src="{{ asset('uploads/picto_sport/')}}{{ sport.sportPhoto }}"></td>
+                <td>{{ sport.sportSite }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('admin_sport_show', { 'id': sport.id }) }}">Voir</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('admin_sport_edit', { 'id': sport.id }) }}">Modifier</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('admin_sport_new') }}">Create a new entry</a>
+        </li>
+    </ul>
+{% endblock %}

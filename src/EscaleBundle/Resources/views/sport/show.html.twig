@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Sport</h1>
+
+    <table>
+        <tbody>
+{#
+            <tr>
+                <th>Id</th>
+                <td>{{ sport.id }}</td>
+            </tr>
+#}
+            <tr>
+                <th>Etat (Actif/Inactif)</th>
+                <td>{% if sport.sportEtat %}Actif{% else %}Inactif{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Libellé</th>
+                <td>{{ sport.sportLib }}</td>
+            </tr>
+            <tr>
+                <th>Pictogramme</th>
+                {#<td>{{ sport.sportPicto }}</td>#}
+                <td>
+                    <img class="image_picto_sport" src="{{ asset('uploads/picto_sport/') }}{{ sport.sportPicto }}">
+                </td>
+            </tr>
+            <tr>
+                <th>Photo</th>
+                {#<td>{{ sport.sportPhoto }}</td>#}
+                <td>
+                    <img class="image_sport" src="{{ asset('uploads/picto_sport/') }}{{ sport.sportPhoto }}">
+                </td>
+            </tr>
+            <tr>
+                <th>Site communautaire</th>
+                <td>{{ sport.sportSite }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('admin_sport_index') }}">Retour à la liste</a>
+        </li>
+        <li>
+            <a href="{{ path('admin_sport_edit', { 'id': sport.id }) }}">Modifier</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

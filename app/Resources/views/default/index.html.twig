@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <div>
+        <video autoplay loop poster="" id="video background">
+            <source src="{{ asset('uploads/video/videomp4.mp4') }}" type="video/mp4">
+        </video>
+    </div>
+
+    <div class="row">
+        <div class="col m8 s12 offset-m2 text_accroche">
+            <p>Hello <span>Manu Surfing</span>, choisis ton spot ou géolocalise toi</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col m6 s12 offset-m3 input_search">
+            <input id="pac-input" class="controls input_search_place" type="text" placeholder="Où ?">
+            <a href="{{ path('map') }}" id="geolocalisation_button" class="geolocalisation_button"><img src="{{ asset('bundles/escale/images/GeoLoc.jpg') }}"></a>
+            <a class="waves-effect waves-light btn get_map" data-href = "{{ path('map') }}">Rechercher</a>
+        </div>
+    </div>
+    <div id="map" style="display: none;"></div>
+
+{% endblock %}
+
+{% block javascripts %}
+
+    {{ parent() }}
+    <script>
+        $('.get_map').on('click', function(){
+            // On recupère le path
+            var href = $(this).attr('data-href');
+            //var address = $('#pac-input').value;
+            var address = document.getElementById('pac-input').value;
+            href = href + '?location=' + address;
+            window.location.href = href;
+        });
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDn52jFrq8R0F1RoukKhtsjINbPDa1v984&libraries=places&callback=initAutocomplete"
+            async defer>
+    </script>
+
+{% endblock %}

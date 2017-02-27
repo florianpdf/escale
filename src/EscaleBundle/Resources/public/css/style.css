@@ -1,0 +1,271 @@
+/* ////////////////////////////////////////// */
+/* /////////    CUSTOM FONT       //////////  */
+/* ////////////////////////////////////////// */
+
+@font-face {
+    font-family: 'exo2';
+    src: url('../fonts/exo2/Exo2-Medium.ttf');
+}
+
+/* ////////////////////////////////////////// */
+/* /////////    CUSTOM GENERAL    //////////  */
+/* ////////////////////////////////////////// */
+
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+/*body {*/
+    /*background: #000;*/
+/*}*/
+
+h1{
+    font-family: "Roboto", sans-serif;
+    text-align: center;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+h2{
+    font-family: "Roboto", sans-serif;
+    font-size: 35px;
+    text-align: center;
+    color: #D55449;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+h3{
+    font-family: "Roboto", sans-serif;
+    color: white;
+}
+h4{
+    font-family: "Roboto", sans-serif;
+    font-size: 20px;
+    text-align: center;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+/* ////////////////////////////////////////// */
+/* /////////     CUSTOM NAVBAR    //////////  */
+/* ////////////////////////////////////////// */
+nav{
+    height: 80px;
+}
+.nav_bar_logo{
+    height: 100%;
+}
+.nav_bar_logo img{
+    height:100%;
+    padding-bottom: 15px;
+    padding-top: 7px;
+    margin-left: 10px;
+}
+nav{
+    background-color: #D55449;
+}
+.nav_bar_logo span{
+    position: relative;
+    margin-left: 10px;
+    top: -33px;
+    left: -9px;
+    font-size: 23px;
+}
+@media screen and (max-width: 960px) {
+    .nav_bar_logo span{
+        display: none;
+    }
+}
+
+
+/* ////////////////////////////////////////// */
+/* /////////     CUSTOM HOME      //////////  */
+/* ////////////////////////////////////////// */
+
+.text_accroche p{
+    font-family: exo2;
+    font-size: 60px;
+    text-align: center;
+    color: white;
+}
+
+.text_accroche span{
+    color: #D55449;
+    margin-top: 30px;
+}
+
+@media screen and (max-width: 960px) {
+    .text_accroche p{
+        font-size: 50px;
+    }
+}
+
+.geolocalisation_button img{
+    height: 40px;
+    top: 15px;
+    right: 4px;
+    position: relative;
+    background-color: white;
+}
+
+#pac-input{
+    border-right: 3px solid #D55449;
+    height: 40px;
+}
+.input_search{
+    text-align: center;
+}
+.get_map{
+    height: 40px;
+    position: relative;
+    top: -1px;
+    right: 3px;
+    background-color: #D55449;
+}
+.get_map:hover{
+    background-color: #D55449;
+}
+.get_map a{
+    font-family: exo2;
+}
+.input_search_place::-webkit-input-placeholder {
+    color: #D55449;
+    font-family: exo2;
+}
+/* ////////////////////////////////////////// */
+/* /////////     CUSTOM MAP       //////////  */
+/* ////////////////////////////////////////// */
+
+
+/* General */
+#map {
+    height: 100%;
+}
+
+/* Input de recherche */
+
+.controls {
+    margin-top: 10px;
+    border: 1px solid transparent;
+    border-radius: 2px 0 0 2px;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    height: 32px;
+    outline: none;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+#pac-input {
+    background-color: #fff;
+    font-family: Roboto;
+    font-size: 15px;
+    font-weight: 300;
+    margin-left: 12px;
+    padding: 0 11px 0 13px;
+    text-overflow: ellipsis;
+    width: 300px;
+}
+
+#pac-input:focus {
+    border-color: #4d90fe;
+}
+
+.pac-container {
+    font-family: Roboto;
+}
+
+#type-selector {
+    color: #fff;
+    background-color: #4d90fe;
+    padding: 5px 11px 0px 11px;
+}
+
+#type-selector label {
+    font-family: Roboto;
+    font-size: 13px;
+    font-weight: 300;
+}
+
+.barre_de_recherche{
+    margin-bottom: 0px;
+    background-color: #897C72;
+}
+
+.meteo{
+    align-content: center;
+}
+
+/* ////////////////////////////////////////// */
+/* /////////     CUSTOM VIDEO     //////////  */
+/* ////////////////////////////////////////// */
+
+video {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    z-index: -100;
+    transform: translateX(-50%) translateY(-50%);
+    background-size: cover;
+    transition: 1s opacity;
+    opacity: 0.5;
+}
+
+.calque_home{
+    background-image: url("../images/2016-07-09.png");
+    z-index: -50;
+}
+
+/* ////////////////////////////////////////// */
+/* /////////     CUSTOM FORM      //////////  */
+/* ////////////////////////////////////////// */
+
+/* Formulaire */
+
+.form_bouton{
+    text-align: center;
+    margin-top: 30px;
+}
+.form_bouton button, .form_bouton a{
+    margin-top: 40px;
+}
+
+/* ////////////////////////////////////////// */
+/* /////////     CUSTOM SHOW      //////////  */
+/* ////////////////////////////////////////// */
+
+.row1{
+    margin-top: 40px;
+}
+
+.row2{
+    margin-top: 40px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    background-color: #897C72;
+}
+.date_picker{
+    text-align: center;
+    margin-top: 25px;
+    color: white;
+}
+
+.btn_jyvais{
+    background-color: #D55449;
+}
+
+@media screen and (max-width: 960px) {
+    .btn_page3{
+        position: inherit;
+    }
+}
+
+.row3{
+    background-color: white
+}
+.row1{
+    background-color: white;
+}

@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Spots</h1>
+
+    <table>
+        <thead>
+            <tr>
+                {#<th>Id</th>#}
+                <th>Etat (Actif/Inactif)</th>
+                <th>Nom</th>
+                <th>Latitude</th>
+                <th>Longitude</th>
+                {#<th>Adresse</th>#}
+                <th>Photo</th>
+                {#<th>Description</th>#}
+                {#<th>Site</th>#}
+                <th>Likes</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for spot in spots %}
+            <tr>
+                {#<td><a href="{{ path('admin_spot_show', { 'id': spot.id }) }}">{{ spot.id }}</a></td>#}
+                <td>{% if spot.spotEtat %}Actif{% else %}Inactif{% endif %}</td>
+                <td>{{ spot.spotNom }}</td>
+                <td>{{ spot.spotGpsLat }}</td>
+                <td>{{ spot.spotGpsLng }}</td>
+                {#<td>{{ spot.spotAdr }}</td>#}
+                {#<td>{{ spot.spotPhoto }}</td>#}
+                <td><img class="image_spot" src="{{ asset('uploads/spot/')}}{{ spot.spotPhoto }}"></td>
+                {#<td>{{ spot.spotDesc }}</td>#}
+                {#<td>{{ spot.spotSite }}</td>#}
+                <td>{{ spot.spotLikes }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('admin_spot_show', { 'id': spot.id }) }}">Voir</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('admin_spot_edit', { 'id': spot.id }) }}">Modifier</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('admin_spot_new') }}">Create a new entry</a>
+        </li>
+    </ul>
+{% endblock %}

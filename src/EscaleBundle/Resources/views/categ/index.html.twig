@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Categories de services</h1>
+
+    <table>
+        <thead>
+            <tr>
+                {#<th>Id</th>#}
+                <th>Libellé</th>
+                <th>Pictogramme</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for categ in categs %}
+            <tr>
+                {#<td><a href="{{ path('admin_categ_show', { 'id': categ.id }) }}">{{ categ.id }}</a></td>#}
+                <td>{{ categ.catLib }}</td>
+                {#<td>{{ categ.catPicto }}</td>#}
+                <td><img class="image_picto_categ" src="{{ asset('uploads/picto_categ/')}}{{ categ.catPicto }}"></td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('admin_categ_show', { 'id': categ.id }) }}">Voir</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('admin_categ_edit', { 'id': categ.id }) }}">Modifier</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('admin_categ_new') }}">Create a new entry</a>
+        </li>
+    </ul>
+{% endblock %}

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/html">
+    <head>
+        <meta charset="UTF-8" />
+        <title>{% block title %}Escale...!{% endblock %}</title>
+        <meta name="viewport" content="width=device-width,initial-scale=1" />
+        {% block stylesheets %}
+
+            {# Appel Materialize CSS #}
+            <link rel="stylesheet" href="{{ asset('bundles/escale/css/materialize.css') }}">
+
+             {#Appel Side Menu CSS#}
+            <link rel="stylesheet" href="{{ asset('bundles/escale/css/pushmenu.css') }}">
+
+            {# Appel CSS perso #}
+            <link rel="stylesheet" href="{{ asset('bundles/escale/css/style.css') }}">
+
+        {% endblock %}
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+    </head>
+    <body style="background-color: black">
+    <nav>
+        <div class="nav-wrapper">
+            <a href="{{ path('homepage') }}" class="brand-logo nav_bar_logo"><img src="{{ asset('bundles/escale/images/logo.png') }}"></a>
+
+            <a href="#" class="brand-logo right nav_bar_logo"><span>Manu Surfing</span> <img src="{{ asset('bundles/escale/images/Manu.png') }}"></a>
+        </div>
+    </nav>
+        {% block body %}{% endblock %}
+        {% block javascripts %}
+
+            {# Appel jQuery #}
+            <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s=" crossorigin="anonymous"></script>
+
+            {# Appel Materialize JS #}
+            <script src="{{ asset('bundles/escale/js/materialize.min.js') }}"></script>
+
+            {#Appel JS Side Menu#}
+            <script src="{{ asset('bundles/escale/js/pushmenu.js') }}"></script>
+
+        {% endblock %}
+    </body>
+</html>
